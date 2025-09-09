@@ -23,38 +23,12 @@ Langkah B. Buat Proyek Django
 9. Migrasi DB.
 10. Jalankan server, lalu cek di localhost:8000.
 11. Matikan server.
-
-Langkah C. Upload Django ke GitHub
-1. Inisialisasi Git di folder football-news → git init.
-2. Buat .gitignore → isi daftar file yang diabaikan (env, db.sqlite3, dll).
-3. Hubungkan remote GitHub.
-Push
-
-git add .
-
-git commit -m "Tutorial 0"
-
-git branch -M master
-
-git push origin master.
-
-Langkah E. Deployment ke PWS
-
-Login ke PWS → pbp.cs.ui.ac.id
-, pakai SSO.
-
-Create Project → beri nama footballnews.
-
-Simpan credentials → jangan hilang.
-
-Set environment variables → copy isi .env.prod ke Environs → Raw Editor.
-
-Tambahkan URL PWS ke ALLOWED_HOSTS di settings.py.
-
-Commit & push perubahan ke GitHub.
-
-Hubungkan ke PWS → jalankan perintah Project Command dari dashboard.
-
-Push ke PWS → git push pws master.
-
-Cek status di dashboard → kalau Running, buka URL <username>-footballnews.pbp.cs.ui.ac.id.
+12. Tambahkan 'main' ke INSTALLED_APPS di settings.py.
+13. Buat folder main/templates/ dan file main.html.
+14. Buat model Shop, lalu tambahkan atribut, kategori, dan fungsi yang sesuai.
+15. Jalankan migrasi.
+16. Edit main/views.py dengan data diri.
+17. Edit template main.html dengan ganti isi hardcode dengan variable Django.
+18. Routing.
+19. Jalankan server dan buka di browser.
+20. Push ke GitHub & PWS
