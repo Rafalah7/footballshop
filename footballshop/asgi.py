@@ -1,5 +1,5 @@
 """
-ASGI config for football_shop project.
+ASGI config for footballshop project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

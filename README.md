@@ -1,4 +1,4 @@
-"# football_shop" 
+"# footballshop" 
 Langkah A. Dasar Git
 
 1. Buat repo di GitHub.
