@@ -29,7 +29,7 @@ Langkah B. Buat Proyek Django
 15. Jalankan migrasi.
 16. Edit main/views.py dengan data diri.
 17. Edit template main.html dengan ganti isi hardcode dengan variable Django.
-18. Edit berkas urls.py di direktori proyek (football-news).
+18. Edit berkas urls.py di direktori proyek (footballshop).
 19. Jalankan server dan buka di browser.
 
 Langkah C. Push ke PWS
