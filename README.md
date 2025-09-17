@@ -193,7 +193,7 @@ Jadi, data delivery itu penting supaya sistem bisa komunikasi dan sinkron antar 
 Mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer?
 
 * XML:
-  ✔️ Bagus untuk data yang **kompleks & terstruktur hierarkis**, mendukung atribut, namespace.
+  ✔️ Bagus untuk data yang kompleks & terstruktur hierarkis, mendukung atribut, namespace.
   ❌ Lebih berat, verbose (tag panjang), parsing lebih lambat.
 
 * JSON:
@@ -222,7 +222,7 @@ Mengapa kita membutuhkan `csrf_token` pada form di Django?
 
 Apa yang terjadi jika tidak ada `csrf_token`?
 
-* Penyerang bisa bikin halaman palsu yang otomatis mengirim form ke server kamu (misalnya transfer uang, ubah password).
+* Penyerang bisa bikin halaman palsu yang otomatis mengirim form ke server (misalnya transfer uang, ubah password).
 * Karena user sudah login, request itu bisa berhasil tanpa sepengetahuan user.
 
 Dengan `csrf_token`, request palsu itu akan ditolak server.
@@ -232,5 +232,6 @@ Dengan `csrf_token`, request palsu itu akan ditolak server.
 ![alt text](<Screenshot (11).png>) 
 ![alt text](<Screenshot (12).png>)
 
-
+Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
+Tidak ada, asdos sudah menjelaskan dengan baik
 </details>
