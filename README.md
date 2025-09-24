@@ -110,7 +110,7 @@ D. Mengembalikan Data dalam Bentuk XML
 
 ---
 
-6. Mengembalikan Data dalam Bentuk JSON
+E. Mengembalikan Data dalam Bentuk JSON
 
 1. Tambahkan fungsi di `views.py`:
 
@@ -129,7 +129,7 @@ D. Mengembalikan Data dalam Bentuk XML
 
 ---
 
-7. Mengembalikan Data Berdasarkan ID
+F. Mengembalikan Data Berdasarkan ID
 
 1. Tambahkan fungsi di `views.py`:
 
@@ -160,7 +160,7 @@ D. Mengembalikan Data dalam Bentuk XML
 
 ---
 
-8. Gunakan Postman untuk Mengecek
+G. Gunakan Postman untuk Mengecek
 
 1. Buka Postman → buat request `GET` ke:
 
@@ -171,7 +171,7 @@ D. Mengembalikan Data dalam Bentuk XML
 
 ---
 
-9. Push ke GitHub & PWS
+H. Push ke GitHub & PWS
 
 ```
 git add .
@@ -235,3 +235,118 @@ Dengan `csrf_token`, request palsu itu akan ditolak server.
 Apakah ada feedback untuk asdos di tutorial 2 yang sudah kalian kerjakan?
 Tidak ada, asdos sudah menjelaskan dengan baik
 </details>
+
+<details>
+<Summary><b>Tugas 4</b></Summary>
+
+1. Django AuthenticationForm
+`AuthenticationForm` adalah form bawaan Django untuk proses login user. Form ini secara otomatis memvalidasi:
+
+* Apakah username ada di database.
+* Apakah password sesuai (menggunakan hash, bukan plaintext).
+* Apakah user aktif (tidak dinonaktifkan).
+
+Kelebihan:
+* Mudah digunakan, sudah jadi dan tinggal diimpor.
+* Terintegrasi dengan sistem autentikasi Django.
+* Aman secara default karena mengikuti praktik terbaik.
+* Bisa dikustomisasi dengan menambahkan field baru.
+
+Kekurangan:
+* Kurang fleksibel untuk metode login selain username/password (misalnya login dengan email atau OAuth).
+* Tampilan standar, biasanya perlu dikustomisasi untuk kebutuhan UI/UX.
+
+2. Perbedaan Autentikasi dan Otorisasi
+* Autentikasi adalah proses memastikan identitas user, misalnya saat login dengan username dan password.
+* Otorisasi adalah proses memastikan hak akses user, misalnya apakah user boleh menghapus produk.
+
+Implementasi di Django:
+* Autentikasi:
+  * Disediakan oleh `django.contrib.auth`.
+  * Menggunakan form seperti `AuthenticationForm`, `UserCreationForm`.
+  * Middleware `AuthenticationMiddleware` menambahkan `request.user`.
+
+* Otorisasi:
+  * Sistem permission (`is_superuser`, `is_staff`, `has_perm`).
+  * Dekorator `@login_required` untuk memastikan hanya user yang login yang dapat mengakses.
+  * Dekorator `@permission_required('app.permission_name')` untuk hak akses lebih spesifik.
+
+3. Kelebihan dan Kekurangan Session dan Cookies
+Cookies
+Kelebihan:
+* Ringan dan langsung tersedia di client.
+* Tidak membebani server karena disimpan di sisi client.
+* Bisa diakses JavaScript untuk kebutuhan tertentu.
+
+Kekurangan:
+* Mudah diubah oleh user sehingga tidak aman untuk data sensitif.
+* Ada batas ukuran (sekitar 4KB per cookie).
+* Rentan terhadap serangan XSS jika tidak diamankan.
+
+Sessions
+Kelebihan:
+* Lebih aman karena data asli tidak ada di client, hanya session ID.
+* Bisa menyimpan data lebih besar dan kompleks.
+* Terintegrasi penuh dengan Django melalui `request.session`.
+
+Kekurangan:
+* Membebani server karena data disimpan di sisi server.
+* Membutuhkan mekanisme untuk menghapus session yang sudah kadaluarsa.
+
+4. Keamanan Cookies dan Penanganan Django
+Secara default cookies tidak sepenuhnya aman karena berisiko:
+* Cross-Site Scripting (XSS) dapat mencuri cookies.
+* Session hijacking jika session ID dicuri.
+* Man-in-the-middle attack jika cookie dikirim tanpa HTTPS.
+
+Django menangani hal ini dengan:
+* Pengaturan keamanan bawaan:
+  * `SESSION_COOKIE_SECURE = True` → cookie hanya dikirim lewat HTTPS.
+  * `SESSION_COOKIE_HTTPONLY = True` → cookie tidak bisa diakses oleh JavaScript.
+  * `CSRF_COOKIE_SECURE = True` → CSRF token hanya dikirim lewat HTTPS.
+  * `CSRF_COOKIE_HTTPONLY = True`.
+* Proteksi CSRF otomatis dengan `{% csrf_token %}`.
+* Password hashing menggunakan algoritma kuat.
+* Framework session untuk memastikan data penting tetap tersimpan di server, bukan di cookie.
+
+5. Langkah-Langkah Tugas 4:
+A. Membuat Fungsi dan Form Registrasi
+1. Modifikasi views.py untuk import UserCreationForm dan messages, serta menambahkan fungsi register
+2. Buat template register.html dengan mengextend dari base.html
+3. Konfigurasi URLs untuk menambah path register
+
+B. Membuat Fungsi Login
+1. Modifikasi views.py untuk login dengan import AuthenticationForm, authenticate, dan login, serta membuat fungsi login_user
+2. Buat template login.html dengan mengextend dari base.html
+3. Konfigurasi URLs untuk login dengan menambahkan import dari views dan membuat path baru
+
+C. Membuat Fungsi Logout
+1. Modifikasi views.py untuk logout dengan import logout dan membuat fungsi logout-user
+2. Tambahkan tombol logout di main.html
+3. Konfigurasi URLs untuk logout dengan import dari views dan membuat path baru
+
+D. Merestriksi Akses Halaman
+1. Tambahkan decorator login_required di views untuk fungsi show_main dan show_products
+
+E. Menggunakan Data dari Cookies
+1. Modifikasi fungsi login untuk set cookie dengan import datetime, HttpResponseRedirect, dan reverse, serta modifikasi blok if form.is_valid() di fungsi login_user
+2. Tampilkan last_login di context pada fungsi show_main
+3. Tampilkan last_login di template main.html
+4. Modifikasi fungsi logout untuk hapus cookie
+
+F. Menghubungkan Model Product dengan User
+1. Modifikasi model Product dengan menambah field user dan import User
+2. Jalankan migration
+3. Modifikasi fungsi create_news sehingga harus login_required
+4. Modifikasi fungsi show_main dengan filter
+5. Tambahkan tombol filter di main.html
+6. Tampilkan author di news_detail.html
+
+Finalisasi
+```
+git add .
+git commit -m
+git push origin master
+git push pws master
+```
+<details>
