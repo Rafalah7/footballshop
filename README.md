@@ -350,3 +350,118 @@ git push origin master
 git push pws master
 ```
 <details>
+
+<details>
+<Summary><b>Tugas 5</b></Summary>
+
+1. Urutan Prioritas CSS Selector
+Jika terdapat beberapa CSS selector yang mengatur elemen HTML yang sama, browser menggunakan aturan prioritas berikut:
+
+* Inline styles (ditulis langsung pada atribut `style` di elemen HTML) memiliki prioritas tertinggi.
+* ID selector (`#id`) lebih kuat dibandingkan class, pseudo-class, dan element selector.
+* Class selector (`.class`), pseudo-class (`:hover`, `:active`, dll.), dan attribute selector lebih kuat daripada element selector.
+* Element selector (`div`, `p`, `h1`) memiliki prioritas terendah.
+* Jika prioritas sama, maka aturan yang ditulis terakhir akan berlaku.
+
+2. Pentingnya Responsive Design
+Responsive design memastikan tampilan website menyesuaikan ukuran layar (desktop, tablet, mobile). Tanpa ini, user experience akan buruk karena tampilan bisa berantakan.
+* Contoh aplikasi yang sudah menerapkan responsive design:
+  * Tokopedia → Tampilan rapi di desktop dan mobile, menu navigasi berubah menjadi hamburger menu di layar kecil.
+* Contoh aplikasi yang belum menerapkan responsive design:
+  * https://www.tagteamsigns.com/ → ketika dibuka di mobile, teks terlalu kecil, gambar kepotong, dan user harus zoom in/out.
+
+Dengan responsive design, aplikasi lebih mudah diakses, meningkatkan kenyamanan pengguna, serta memperluas jangkauan.
+
+3. Perbedaan Margin, Border, dan Padding
+* Margin: Ruang di luar elemen, memisahkan elemen dengan elemen lain.
+* Border: Garis yang membungkus elemen, berada di antara margin dan padding.
+* Padding: Ruang di dalam elemen, antara konten dan border.
+
+Implementasi contoh CSS:
+```
+.box {
+  margin: 20px;     /* jarak antar elemen */
+  border: 2px solid black;  /* garis di sekeliling elemen */
+  padding: 15px;    /* ruang antara isi elemen dan border */
+}
+```
+
+4. Flexbox dan Grid Layout
+* Flexbox (Flexible Box Layout):
+  Digunakan untuk menyusun elemen dalam satu arah (baris atau kolom). Sangat cocok untuk layout yang dinamis, misalnya navbar, daftar item horizontal/vertical.
+  ```
+  .flex-container {
+    display: flex;
+    justify-content: space-between; /* posisi horizontal */
+    align-items: center; /* posisi vertical */
+  }
+  ```
+
+* Grid Layout:
+  Digunakan untuk menyusun elemen dalam baris dan kolom. Cocok untuk layout kompleks seperti galeri, dashboard, atau product listing.
+  ```
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 kolom */
+    gap: 10px;
+  }
+  ```
+Kesimpulan:
+* Gunakan flexbox untuk alignment 1D (horizontal/vertical).
+* Gunakan grid untuk layout 2D (baris dan kolom).
+
+Langkah-Langkah Tutorial Django (Football News)
+
+1. Setup Tailwind di Django
+- Buka file `templates/base.html`.
+- Tambahkan meta viewport.
+- Tambahkan CDN Tailwind.
+
+2. Fitur Edit News
+- Di `views.py` → buat fungsi `edit_products`.
+- Buat template `edit_products.html`.
+- Tambahkan URL.
+- Tambahkan tombol Edit di `main.html`.
+
+3. Fitur Delete News
+- Di `views.py` → buat fungsi `delete_products`.
+- Tambahkan URL.
+- Tambahkan tombol Delete di `main.html`.
+
+4. Membuat Navigation Bar
+- Buat file `templates/navbar.html`.
+- Isi dengan struktur navbar (judul, menu, login/logout).
+- Tambahkan ke `main.html` dengan {% include 'navbar.html' %}:
+
+5. Konfigurasi Static Files
+- Di `settings.py`, tambahkan `WhiteNoiseMiddleware`.
+- Tambahkan:
+   ```
+   STATIC_URL = '/static/'
+   if DEBUG:
+       STATICFILES_DIRS = [BASE_DIR / 'static']
+   else:
+       STATIC_ROOT = BASE_DIR / 'static'
+   ```
+
+6. Styling Global
+- Buat `static/css/global.css`.
+- Tambahkan CSS custom untuk form & checkbox.
+- Hubungkan di `base.html`.
+
+7. Styling Navbar (Responsive)
+- Update `navbar.html` → gunakan Tailwind class + tombol hamburger.
+- Tambahkan JS untuk toggle mobile menu.
+
+8. Styling Halaman Login
+- Ubah `login.html` dengan layout Tailwind (form + error message).
+
+9. Styling Halaman Register
+- Ubah `register.html` dengan form Tailwind (form + error message + link login).
+
+10. Styling Halaman Home
+- Buat file `card_product.html` untuk tampilan tiap produk.
+- Tambahkan tampilan empty state (`no-product.png`) di `/static/image`.
+- Update `main.html` → gunakan include `card_product.html`.
+
+<details>

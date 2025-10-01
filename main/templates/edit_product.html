@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block meta %}
-<title>Create Product - Football Shop</title>
+<title>Edit Product - Football Shop</title>
 {% endblock meta %}
 
 {% block content %}
@@ -118,7 +118,7 @@
     margin-top: -6px;
     margin-bottom: 10px;
   }
-
+  
   .checkbox-wrapper {
     display: flex;
     align-items: center;
@@ -138,39 +138,38 @@
 
   <div class="form-card">
     <div class="form-header">
-      <h1>Create New Product</h1>
-      <p>Fill out the form below to share your football products</p>
+      <h1>Edit Product</h1>
+      <p>Update your football product details</p>
     </div>
 
     <form method="POST">
-    {% csrf_token %}
-    {% for field in form %}
+      {% csrf_token %}
       
-      {% if field.name == 'is_featured' %}
-        <div class="checkbox-wrapper">  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field }}
-        </div>
-      
-      {% else %}
-        <div>
-          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-          {{ field }}
-          {% if field.help_text %}
-            <p class="help-text">{{ field.help_text }}</p>
-          {% endif %}
-          {% for error in field.errors %}
-            <p class="error-text">{{ error }}</p>
-          {% endfor %}
-        </div>
-      {% endif %}
+      {% for field in form %}
+        {% if field.name == 'is_featured' %}
+          <div class="checkbox-wrapper">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+          </div>
+        {% else %}
+          <div>
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              <p class="help-text">{{ field.help_text }}</p>
+            {% endif %}
+            {% for error in field.errors %}
+              <p class="error-text">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
 
-    {% endfor %}
-
-    <div class="form-actions">
-      <a href="{% url 'main:show_main' %}" class="btn btn-cancel">Cancel</a>
-      <button type="submit" class="btn btn-submit">Post Product</button>
-    </div>
-  </form>
+      <div class="form-actions">
+        <a href="{% url 'main:show_main' %}" class="btn btn-cancel">Cancel</a>
+        <button type="submit" class="btn btn-submit">Save Changes</button>
+      </div>
+    </form>
   </div>
 </div>
 {% endblock %}

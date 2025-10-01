@@ -1,0 +1,53 @@
+{% load static %}
+
+<style>
+  #mobile-menu-toggle:checked ~ #mobile-menu {
+    display: block;
+  }
+</style>
+
+<nav class="bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900 text-white fixed w-full top-0 z-50 shadow-md">
+  
+  <input type="checkbox" id="mobile-menu-toggle" class="hidden">
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+
+      <div class="flex items-center">
+        <a href="{% url 'main:show_main' %}" class="text-xl font-bold text-purple-300 hover:text-purple-200">
+          Football Shop
+        </a>
+      </div>
+
+      <div class="hidden md:flex space-x-6 items-center">
+        <a href="?filter=all" class="hover:text-purple-200 transition">All Products</a>
+        <a href="?filter=my" class="hover:text-purple-200 transition">My Products</a>
+        <a href="{% url 'main:create_product' %}" class="hover:text-purple-200 transition">Add Product</a>
+        <a href="{% url 'main:logout' %}" class="hover:text-purple-200 transition">Logout</a>
+        
+        <div class="border-l border-purple-600 pl-6">
+          <p class="text-xs text-indigo-200 font-medium">Rafalah Izak</p>
+          <p class="text-xs text-gray-400">2406417790 - PBP B</p>
+        </div>
+      </div>
+
+      <div class="md:hidden flex items-center">
+        <label for="mobile-menu-toggle" class="text-2xl focus:outline-none cursor-pointer">
+          ☰
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden bg-gradient-to-r from-blue-950 via-purple-950 to-indigo-950 border-t border-gray-700">
+    <a href="?filter=all" class="block px-4 py-2 hover:bg-purple-800">All Products</a>
+    <a href="?filter=my" class="block px-4 py-2 hover:bg-purple-800">My Products</a>
+    <a href="{% url 'main:create_product' %}" class="block px-4 py-2 hover:bg-purple-800">Add Product</a>
+    <a href="{% url 'main:logout' %}" class="block px-4 py-2 hover:bg-purple-800">Logout</a>
+
+    <div class="border-t border-purple-800 px-4 py-3 text-center">
+      <p class="text-sm text-indigo-200 font-semibold">Rafalah Izak</p>
+      <p class="text-xs text-gray-400">2406417790 - Kelas PBP B</p>
+    </div>
+  </div>
+</nav>
