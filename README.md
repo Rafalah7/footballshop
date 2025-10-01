@@ -337,10 +337,10 @@ E. Menggunakan Data dari Cookies
 F. Menghubungkan Model Product dengan User
 1. Modifikasi model Product dengan menambah field user dan import User
 2. Jalankan migration
-3. Modifikasi fungsi create_news sehingga harus login_required
+3. Modifikasi fungsi create_product sehingga harus login_required
 4. Modifikasi fungsi show_main dengan filter
 5. Tambahkan tombol filter di main.html
-6. Tampilkan author di news_detail.html
+6. Tampilkan author di product_detail.html
 
 Finalisasi
 ```
@@ -410,20 +410,20 @@ Kesimpulan:
 * Gunakan flexbox untuk alignment 1D (horizontal/vertical).
 * Gunakan grid untuk layout 2D (baris dan kolom).
 
-Langkah-Langkah Tutorial Django (Football News)
+Langkah-Langkah Tutorial Django
 
 1. Setup Tailwind di Django
 - Buka file `templates/base.html`.
 - Tambahkan meta viewport.
 - Tambahkan CDN Tailwind.
 
-2. Fitur Edit News
+2. Fitur Edit Products
 - Di `views.py` → buat fungsi `edit_products`.
 - Buat template `edit_products.html`.
 - Tambahkan URL.
 - Tambahkan tombol Edit di `main.html`.
 
-3. Fitur Delete News
+3. Fitur Delete Products
 - Di `views.py` → buat fungsi `delete_products`.
 - Tambahkan URL.
 - Tambahkan tombol Delete di `main.html`.
@@ -451,7 +451,7 @@ Langkah-Langkah Tutorial Django (Football News)
 
 7. Styling Navbar (Responsive)
 - Update `navbar.html` → gunakan Tailwind class + tombol hamburger.
-- Tambahkan JS untuk toggle mobile menu.
+- Tambahkan untuk toggle mobile menu.
 
 8. Styling Halaman Login
 - Ubah `login.html` dengan layout Tailwind (form + error message).
@@ -464,4 +464,5 @@ Langkah-Langkah Tutorial Django (Football News)
 - Tambahkan tampilan empty state (`no-product.png`) di `/static/image`.
 - Update `main.html` → gunakan include `card_product.html`.
 
+11. Melakukan add-commit-push ke GitHub.
 <details>
