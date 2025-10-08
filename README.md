@@ -466,3 +466,40 @@ Langkah-Langkah Tutorial Django
 
 11. Melakukan add-commit-push ke GitHub.
 <details>
+
+<details>
+<Summary><b>Tugas 6</b></Summary>
+1. Apa perbedaan antara synchronous request dan asynchronous request?
+Synchronous request berarti permintaan dari browser ke server berjalan secara berurutan. Browser akan menunggu respon dari server sebelum melanjutkan ke perintah berikutnya. Akibatnya, selama proses ini berlangsung, pengguna tidak bisa berinteraksi dengan halaman karena halaman dibekukan sementara atau direload.
+
+Sebaliknya, asynchronous request memungkinkan browser mengirim permintaan ke server di latar belakang tanpa menghentikan interaksi pengguna. Dengan cara ini, halaman tidak perlu direload untuk memperbarui sebagian konten. AJAX (Asynchronous JavaScript and XML) adalah contoh penerapan asynchronous request.
+
+Contohnya, ketika form dikirim secara biasa menggunakan `<form action="..." method="POST">`, halaman akan direload setelah dikirim (synchronous). Namun, jika dikirim dengan `fetch()` atau `XMLHttpRequest`, data dikirim tanpa reload halaman (asynchronous).
+
+2. Bagaimana AJAX bekerja di Django (alur request–response)?
+Proses kerja AJAX di Django terjadi dalam beberapa langkah. Pertama, pengguna melakukan tindakan di halaman, misalnya menekan tombol “Add Product”. JavaScript kemudian mengeksekusi fungsi yang mengirim data ke server menggunakan `fetch()` atau `XMLHttpRequest`. Django menerima request tersebut melalui view (biasanya dengan decorator seperti `@require_POST`), lalu memproses data sesuai logika yang dibuat.
+
+Berbeda dari render biasa, Django tidak mengirim HTML kembali, tetapi mengembalikan data dalam format JSON. Setelah menerima JSON dari server, JavaScript menampilkan hasilnya langsung ke halaman dengan memanipulasi DOM, tanpa harus memuat ulang seluruh halaman.
+
+Secara singkat, alurnya adalah:
+User Action → JavaScript → AJAX Request → Django View → JSON Response → Update DOM
+
+3. Apa keuntungan menggunakan AJAX dibandingkan render biasa di Django?
+Penggunaan AJAX memiliki beberapa keunggulan dibanding render halaman penuh.
+Pertama, tidak perlu reload halaman, sehingga interaksi terasa lebih cepat dan efisien.
+Kedua, hanya bagian tertentu dari halaman yang diperbarui, bukan seluruh halaman, sehingga lebih hemat waktu dan bandwidth.
+Ketiga, pengalaman pengguna menjadi lebih baik karena interaksi terasa lancar dan modern.
+Terakhir, AJAX sangat cocok digunakan pada aplikasi dengan konsep Single Page Application (SPA), di mana semua interaksi terjadi dalam satu halaman.
+
+4. Bagaimana cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django?
+Dalam penggunaan AJAX untuk login dan registrasi, keamanan tetap menjadi hal utama. Django sudah menyediakan perlindungan CSRF (Cross-Site Request Forgery) untuk mencegah penyalahgunaan request. Pastikan token CSRF dikirim bersama setiap request POST, misalnya dengan menambahkan header `"X-CSRFToken"`.
+
+Selain itu, koneksi harus menggunakan HTTPS agar data seperti kata sandi tidak bocor saat dikirim. Validasi input tetap harus dilakukan di sisi server, bukan hanya di JavaScript, untuk mencegah manipulasi data. Django juga harus memastikan data sensitif seperti password hash tidak dikembalikan ke client melalui JSON.
+Terakhir, gunakan decorator seperti `@login_required` atau sistem izin untuk memastikan hanya pengguna sah yang dapat mengakses data melalui AJAX.
+
+5. Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website?
+AJAX membuat pengalaman pengguna menjadi lebih cepat, interaktif, dan efisien. Dengan AJAX, halaman tidak perlu direload untuk memperbarui konten. Misalnya, saat pengguna menambahkan produk baru, produk tersebut langsung muncul di daftar tanpa harus memuat ulang halaman.
+
+Hal ini menciptakan pengalaman yang lebih alami dan menyenangkan karena pengguna tidak perlu menunggu lama setiap kali berinteraksi. Selain itu, notifikasi atau pesan sukses dapat muncul secara langsung tanpa transisi halaman, menjadikan website terasa lebih modern dan responsif.
+
+<details>

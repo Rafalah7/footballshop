@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-
 <title>Register - Football Shop</title>
 {% endblock meta %}
 
@@ -15,105 +14,97 @@
         <p class="text-gray-400">Create your Football Shop account</p>
       </div>
 
-  <!-- Form Errors Display -->
-  {% if form.non_field_errors %}
-    <div class="mb-6">
-      {% for error in form.non_field_errors %}
-        <div class="px-4 py-3 rounded text-sm border bg-red-900/40 border-red-500 text-red-300">
-          {{ error }}
+      <div id="form-errors" class="hidden mb-4 px-4 py-3 rounded text-sm border bg-red-900/40 border-red-500 text-red-300"></div>
+
+      <form id="registerForm" class="space-y-5">
+        {% csrf_token %}
+        
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Username</label>
+          <input id="username" name="username" type="text" required 
+                 class="w-full px-4 py-3 border border-[#444] bg-[#2a2a2a] text-gray-100 rounded focus:outline-none focus:border-purple-500 transition duration-200" 
+                 placeholder="Choose a username">
+          <div id="username-error" class="text-red-400 text-xs mt-1"></div>
         </div>
-      {% endfor %}
-    </div>
-  {% endif %}
 
-  {% if form.errors %}
-    <div class="mb-6">
-      {% for field, errors in form.errors.items %}
-        {% if field != '__all__' %}
-          {% for error in errors %}
-            <div class="px-4 py-3 rounded text-sm border bg-red-900/40 border-red-500 text-red-300 mb-2">
-              <strong>{{ field|title }}:</strong> {{ error }}
-            </div>
-          {% endfor %}
-        {% endif %}
-      {% endfor %}
-    </div>
-  {% endif %}
-
-  <form method="POST" action="" class="space-y-5">
-    {% csrf_token %}
-    
-    <div>
-      <label for="username" class="block text-sm font-medium text-gray-300 mb-2">Username</label>
-      <input 
-        id="username" 
-        name="username" 
-        type="text" 
-        required 
-        class="w-full px-4 py-3 border border-[#444] bg-[#2a2a2a] text-gray-100 rounded focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500 transition duration-200" 
-        placeholder="Choose a username">
-    </div>
-
-    <div>
-      <label for="password1" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
-      <input 
-        id="password1" 
-        name="password1" 
-        type="password" 
-        required 
-        class="w-full px-4 py-3 border border-[#444] bg-[#2a2a2a] text-gray-100 rounded focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500 transition duration-200" 
-        placeholder="Create a password">
-    </div>
-
-    <div>
-      <label for="password2" class="block text-sm font-medium text-gray-300 mb-2">Confirm Password</label>
-      <input 
-        id="password2" 
-        name="password2" 
-        type="password" 
-        required 
-        class="w-full px-4 py-3 border border-[#444] bg-[#2a2a2a] text-gray-100 rounded focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500 transition duration-200" 
-        placeholder="Confirm your password">
-    </div>
-
-    <button 
-      type="submit" 
-      class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 text-white font-medium py-3 px-4 rounded hover:from-indigo-500 hover:via-purple-500 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-[#121212] transition duration-200">
-      Create Account
-    </button>
-  </form>
-
-  <!-- Messages Display -->
-  {% if messages %}
-    <div class="mt-6">
-      {% for message in messages %}
-        <div 
-          class="
-            px-4 py-3 rounded text-sm border
-            {% if message.tags == 'success' %}
-              bg-green-900/40 border-green-500 text-green-300
-            {% elif message.tags == 'error' %}
-              bg-red-900/40 border-red-500 text-red-300
-            {% else %}
-              bg-[#2a2a2a] border-[#444] text-gray-300
-            {% endif %}
-          ">
-          {{ message }}
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+          <input id="password" name="password1" type="password" required 
+                 class="w-full px-4 py-3 border border-[#444] bg-[#2a2a2a] text-gray-100 rounded focus:outline-none focus:border-purple-500 transition duration-200" 
+                 placeholder="Create a password">
+          <div id="password1-error" class="text-red-400 text-xs mt-1"></div>
         </div>
-      {% endfor %}
-    </div>
-  {% endif %}
 
-  <div class="mt-6 text-center">
-    <p class="text-gray-400 text-sm">
-      Already have an account? 
-      <a href="{% url 'main:login' %}" class="text-purple-400 hover:text-purple-300 font-medium">
-        Sign In
-      </a>
-    </p>
+        <div>
+          <label for="password_confirmation" class="block text-sm font-medium text-gray-300 mb-2">Confirm Password</label>
+          <input id="password_confirmation" name="password2" type="password" required 
+                 class="w-full px-4 py-3 border border-[#444] bg-[#2a2a2a] text-gray-100 rounded focus:outline-none focus:border-purple-500 transition duration-200" 
+                 placeholder="Confirm your password">
+          <div id="password2-error" class="text-red-400 text-xs mt-1"></div>
+        </div>
+
+        <button type="submit" 
+                class="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-blue-600 text-white font-medium py-3 px-4 rounded hover:from-indigo-500 hover:via-purple-500 hover:to-blue-500 transition duration-200">
+          Create Account
+        </button>
+      </form>
+
+      <div class="mt-6 text-center">
+        <p class="text-gray-400 text-sm">
+          Already have an account? 
+          <a href="{% url 'main:login' %}" class="text-purple-400 hover:text-purple-300 font-medium">
+            Sign In
+          </a>
+        </p>
+      </div>
+    </div>
   </div>
 </div>
 
-  </div>
-</div>
+<script>
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    document.getElementById('form-errors').classList.add('hidden');
+    document.getElementById('username-error').innerText = '';
+    document.getElementById('password1-error').innerText = '';
+    document.getElementById('password2-error').innerText = '';
+
+    const formData = new FormData(this);
+    const response = await fetch("{% url 'main:register_ajax' %}", {
+        method: "POST",
+        body: formData,
+        headers: { "X-CSRFToken": formData.get('csrfmiddlewaretoken') },
+    });
+
+    const data = await response.json();
+
+    if (response.ok) {
+        if (typeof showToast === 'function') {
+            showToast('Success!', data.message, 'success');
+        } else {
+            alert(data.message);
+        }
+        setTimeout(() => {
+            window.location.href = "{% url 'main:login' %}";
+        }, 2000);
+    } else {
+        const errors = data.errors;
+        if (errors.username) {
+            document.getElementById('username-error').innerText = errors.username[0];
+        }
+        if (errors.password1) {
+            document.getElementById('password1-error').innerText = errors.password1[0];
+        }
+        if (errors.password2) {
+            document.getElementById('password2-error').innerText = errors.password2[0];
+        }
+        if (errors.__all__) {
+            document.getElementById('form-errors').innerText = errors.__all__[0];
+            document.getElementById('form-errors').classList.remove('hidden');
+        }
+    }
+});
+</script>
+
 {% endblock content %}
